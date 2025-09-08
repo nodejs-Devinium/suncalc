@@ -138,7 +138,7 @@ The zenith angle can be used do draw the moon shape from the observers perspecti
 ### Moon rise and set times
 
 ```js
-SunCalc.getMoonTimes(/*Date*/ date, /*Number*/ latitude, /*Number*/ longitude[, inUTC])
+SunCalc.getMoonTimes(/*Date*/ date, /*Number*/ latitude, /*Number*/ longitude)
 ```
 
 Returns an object with the following properties:
@@ -148,8 +148,13 @@ Returns an object with the following properties:
  * `alwaysUp`: `true` if the moon never rises/sets and is always _above_ the horizon during the day
  * `alwaysDown`: `true` if the moon is always _below_ the horizon
 
-By default, it will search for moon rise and set during local user's day (frou 0 to 24 hours).
-If `inUTC` is set to true, it will instead search the specified date from 0 to 24 UTC hours.
+It will search for moon rise and set within 24 hours starting from `date`.
+
+**NOTE.** It seems that there can be rare occasions in some places on the planet at some specific time of year when there will be two moon rises or two moon sets in 24-hours period. But since this library returns results as an object it may miss such cases. That's why you may want to make 3 separate requests in order to find all possible moon rises and sets:
+
+ * `date` - 12 hours
+ * `date`
+ * `date` + 12 hours
 
 ## Changelog
 
